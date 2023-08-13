@@ -27,10 +27,9 @@ func (s *Server) ListenAndServe(port int) error {
 		return err
 	}
 
-	grpcServer := grpc.NewServer()
 	audit.RegisterAuditServiceServer(s.grpcServer, s.auditServer)
 
-	if err := grpcServer.Serve(lis); err != nil {
+	if err := s.grpcServer.Serve(lis); err != nil {
 		return err
 	}
 
